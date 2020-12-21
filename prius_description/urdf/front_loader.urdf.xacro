@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="front_loader_example">
+
+  <!-- Base Footprint -->
+  <link name="base_link" />
+
+  <!-- Base Link -->
+  <joint name="base_link_connection" type="fixed">
+    <parent link="base_link"/>
+    <child link="chassis"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <link name="chassis" >
+    <visual>
+      <origin xyz="0 0 -1.5" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://prius_description/meshes/front_loader/front_loader_2019_04_30.obj" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="8.0 2.8 3.5" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.1"/>
+      <mass value="1500"/>
+      <inertia ixx="581.13354740" ixy="0.0" ixz="0.0" iyy="2591.30846112" iyz="0.0" izz="2681.95008628"/>
+    </inertial>
+  </link>
+
+  <xacro:include filename="$(find ouster_description)/urdf/OS1-64.urdf.xacro"/>
+  
+  
+  <OS1-64 parent="chassis" name="os1_sensor" hz="10" samples="100">
+    <origin xyz="-4.7 0.07 2.3" rpy="0 -.7 0" />
+  </OS1-64>
+
+  <OS1-64 parent="chassis" name="os1_sensor_2" topic_points="/os1_cloud_node/points_2" topic_imu="/os1_cloud_node/imu_2" hz="10" samples="100" lidar_link="os1_lidar_2" imu_link="os1_imu_2" vfov_min="-.26" vfov_max=".26">
+    <origin xyz="-3.7 1.5 2.0" rpy="0 .7 1.54" />
+  </OS1-64>
+
+<!-- OS0 -->
+  <OS1-64 parent="chassis" name="os1_sensor_3" topic_points="/os1_cloud_node/points_3" topic_imu="/os1_cloud_node/imu_3" min_range="0.25" hz="10" samples="100" lidar_link="os1_lidar_3" imu_link="os1_imu_3" vfov_min="-.75" vfov_max=".75">
+    <origin xyz="-3.7 -1.5 2.0" rpy="0 -.7 1.54" />
+  </OS1-64>
+
+
+<!--
+  params="*origin parent:=base_link name:=os1_sensor topic_points:=/os1_cloud_node/points topic_imu:=/os1_cloud_node/imu hz:=10 lasers:=64 samples:=512 min_range:=0.9 max_range:=75.0 noise:=0.008 min_angle:=-${M_PI} max_angle:=${M_PI} lidar_link:=os1_lidar imu_link:=os1_imu vfov_min:=-.26 vfov_max:=.26"
+-->
+
+
+</robot>

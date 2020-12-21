@@ -1,0 +1,12 @@
+hacı catkin_make yaprsın 
+images ın içinde Training images diye örnek resimler var onlardan iterasyonla öğreniyor.
+src>clasisfierda da ekleme yapılacak yerleri bissürü comment içine aldım // // // gibi
+
+sıkıntı şu leraningi ppm formatında yapıyo tek tek dosya dönüştütemedim hepsi için dönüştürdüğümün de şu an çalışmıyor maalesef 
+
+ayrıca kendi test fonksiyonu da çlışmıyor
+
+
+test ve launch komutlarına buradan bakarsın;
+
+https://github.com/MichiMaestre/Traffic-Sign-Recognition-for-Autonomous-Cars
